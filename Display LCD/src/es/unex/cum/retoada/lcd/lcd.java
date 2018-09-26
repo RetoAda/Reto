@@ -73,6 +73,77 @@ public class lcd {
 			}
 			
 			//Ya tengo guardado los booleanos de los números que tengo que mostrar
+			//Hay que acceder a la lista 5 veces para dibujar las distintas líneas
+			//Primera vez: norte (-)
+			Iterator it2 = l.iterator();
+			while (it2.hasNext()) {
+				booleanos b = (booleanos) it2.next(); //Cojo los booleanos del número
+				for (int i = 0; i<tamanio; i++) {
+					System.out.print(" ");
+					if (b.getNorte()) System.out.print("-");
+					else System.out.print(" ");
+					System.out.print(" ");
+				}
+			}
+			System.out.println(" ");
+			
+			//Segunda vez: nororeste y noreste (|)
+			for (int i = 0; i<tamanio; i++) {
+				it2 = l.iterator();
+				while (it2.hasNext()) {
+					booleanos b = (booleanos) it2.next(); //Cojo los booleanos del número
+					if (b.getNoroeste()) System.out.print("|");
+					else System.out.print(" ");
+					System.out.print(" ");
+					System.out.print(" ");
+					if (b.getNoreste()) System.out.print("|");
+					else System.out.print(" ");
+					
+				}
+				System.out.println(" ");
+			}
+			
+			//Tercera vez: centro (-) --> igual que el norte
+			it2 = l.iterator();
+			while (it2.hasNext()) {
+				booleanos b = (booleanos) it2.next(); //Cojo los booleanos del número
+				for (int i = 0; i<tamanio; i++) {
+					System.out.print(" ");
+					if (b.getCentro()) System.out.print("-");
+					else System.out.print(" ");
+					System.out.print(" ");
+				}
+			}
+			System.out.println(" ");
+			
+			//Cuarta vez: suroeste y sureste (|) --> igual que noroeste y noreste
+			for (int i = 0; i<tamanio; i++) {
+				it2 = l.iterator();
+				while (it2.hasNext()) {
+					booleanos b = (booleanos) it2.next(); //Cojo los booleanos del número
+					if (b.getSuroeste()) System.out.print("|");
+					else System.out.print(" ");
+					System.out.print(" ");
+					System.out.print(" ");
+					if (b.getSureste()) System.out.print("|");
+					else System.out.print(" ");
+					
+				}
+				System.out.println(" ");
+			}
+			
+			//Quita vez: sur (-) --> igual que norte y centro
+			it2 = l.iterator();
+			while (it2.hasNext()) {
+				booleanos b = (booleanos) it2.next(); //Cojo los booleanos del número
+				for (int i = 0; i<tamanio; i++) {
+					System.out.print(" ");
+					if (b.getSur()) System.out.print("-");
+					else System.out.print(" ");
+					System.out.print(" ");
+				}
+			}
+			System.out.println(" ");
 		}
 	}
 
