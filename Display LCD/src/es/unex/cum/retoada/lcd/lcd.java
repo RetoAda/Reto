@@ -23,7 +23,7 @@ public class lcd {
 
 	public void mostrar (ArrayList <String> lista) {
 		Iterator it = lista.iterator();
-		ArrayList <booleanos> l = new ArrayList <booleanos>(); //lista para guardar los booleanos que luego queremos mostrar
+		ArrayList <booleanos> l = new ArrayList <booleanos>(); //Lista para guardar los booleanos que luego queremos mostrar
 		while (it.hasNext()) {
 			l.clear(); //Se borran todos los elementos de la lista para dibujar la nueva fila
 			String numeros = (String) it.next();
