@@ -23,6 +23,20 @@ public class booleanos {
 	}
 	
 	
+	public booleanos(boolean norte, boolean noroeste, boolean noreste, boolean centro, boolean suroeste,
+			boolean sureste, boolean sur, int numero) {
+		super();
+		this.norte = norte;
+		this.noroeste = noroeste;
+		this.noreste = noreste;
+		this.centro = centro;
+		this.suroeste = suroeste;
+		this.sureste = sureste;
+		this.sur = sur;
+		this.numero = numero;
+	}
+
+
 	public boolean getNorte() {
 		return norte;
 	}

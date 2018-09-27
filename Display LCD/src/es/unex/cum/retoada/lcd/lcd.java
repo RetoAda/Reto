@@ -3,6 +3,7 @@ package es.unex.cum.retoada.lcd;
 import java.util.*;
 
 public class lcd {
+	private HashMap <Integer, booleanos>mapanumeros = new HashMap<Integer, booleanos>();
 
 	public static void main(String[] args) {
 		lcd l = new lcd();
@@ -16,7 +17,7 @@ public class lcd {
 			entrada = s.nextLine();
 			lista.add(entrada);
 		}
-		l.mostrar(lista);
+		l.dibujo2(lista);
 		s.close();
 
 	}
@@ -31,45 +32,56 @@ public class lcd {
 			for (int i = 2; i<numeros.length(); i++) {
 				int n = Integer.parseInt("" + numeros.charAt(i));
 				booleanos b = new booleanos();
+				booleanos B;
 				switch(n) {
 				case 0:
-					b.cero();
-					l.add(b);
+					//b.cero();
+					B = new booleanos(true, true, true, false, true, true, true, 0);
+					l.add(B);
 					break;
 				case 1: 
-					b.uno();
-					l.add(b);
+					//b.uno();
+					B = new booleanos(false, false, true, false, false, true, false, 1);
+					l.add(B);
 					break;
 				case 2:
-					b.dos();
-					l.add(b);
+					//b.dos();
+					B = new booleanos(true, false, true, true, true, false, true, 2);
+					l.add(B);
 					break;
 				case 3:
-					b.tres();
-					l.add(b);
+					//b.tres();
+					B = new booleanos(true, false, true, true, false, true, true, 3);
+					l.add(B);
 					break;
 				case 4:
-					b.cuatro();
-					l.add(b);
+					//b.cuatro();
+					B = new booleanos(false, true, true, true, false, true, false, 4);
+					l.add(B);
 					break;
 				case 5:
-					b.cinco();
-					l.add(b);
+					//b.cinco();
+					B = new booleanos(true, true, false, true, false, true, true, 5);
+					l.add(B);
 					break;
 				case 6:
-					b.seis();
-					l.add(b);
+					//b.seis();
+					B = new booleanos(true, true, false, true, true, true, true, 6);
+					l.add(B);
 					break;
 				case 7:
-					b.siete();
-					l.add(b);
+					B = new booleanos(true, false, true, false, false, true, false, 7);
+					//b.siete();
+					l.add(B);
 					break;
 				case 8:
-					l.add(b);
+					B = new booleanos(true, true, true, true, true, true, true, 8);
+					l.add(B);
 					break;
 				case 9:
-					b.nueve();
-					l.add(b);
+					B = new booleanos(true, true, true, true, false, true, true, 9);
+					//b.nueve();
+					l.add(B);
 					break;
 				}
 			}
@@ -161,6 +173,124 @@ public class lcd {
 					else System.out.print(" ");
 					System.out.print(" ");
 				}*/
+				if (b.getSur()) {
+					System.out.print(" ");
+					System.out.print(guion);
+					System.out.print(" ");
+				}
+				else {
+					System.out.print(espacio);
+				}
+			}
+			System.out.println(" ");
+		}
+	}
+	/**
+	 * Función que guarda en un HashMap todos los digitos para consultarlos fácilmente
+	 */
+	public void crearMapa() {
+
+		booleanos B;
+
+		B = new booleanos(true, true, true, false, true, true, true, 0);
+		mapanumeros.put(0, B);
+		B = new booleanos(false, false, true, false, false, true, false, 1);
+		mapanumeros.put(1, B);
+		B = new booleanos(true, false, true, true, true, false, true, 2);
+		mapanumeros.put(2, B);
+		B = new booleanos(true, false, true, true, false, true, true, 3);
+		mapanumeros.put(3, B);
+		B = new booleanos(false, true, true, true, false, true, false, 4);
+		mapanumeros.put(4, B);
+		B = new booleanos(true, true, false, true, false, true, true, 5);
+		mapanumeros.put(5, B);
+		B = new booleanos(true, true, false, true, true, true, true, 6);
+		mapanumeros.put(6, B);
+		B = new booleanos(true, false, true, false, false, true, false, 7);
+		mapanumeros.put(7, B);
+		B = new booleanos(true, true, true, true, true, true, true, 8);
+		mapanumeros.put(8, B);
+		B = new booleanos(true, true, true, true, false, true, true, 9);
+		mapanumeros.put(9, B);
+	}
+
+	public void dibujo2(ArrayList<String> lista) {
+		crearMapa();
+		String numero = "1234";
+		Iterator it = lista.iterator();
+		ArrayList <booleanos> l = new ArrayList <booleanos>(); //Lista para guardar los booleanos que luego queremos mostrar
+		while (it.hasNext()) {
+			String numeros = (String) it.next();
+			int tamanio = (Integer.parseInt(""+numeros.charAt(0)));
+			StringTokenizer tokens_numeros = new StringTokenizer(numeros);
+			tokens_numeros.nextToken();
+			String num = tokens_numeros.nextToken(); //Número que se va a representar
+
+			/*Cadenas auxiliares útiles a la hora de la representación*/
+			String guion = new String(new char[tamanio]).replace("\0", "-");
+			String espacio = new String(new char[tamanio+2]).replace("\0", " ");
+			String medio = new String(new char[tamanio]).replace("\0", " ");
+
+			/* Representación del norte */
+			for (int i = 0; i<num.length(); i++) {
+				int cifra = Integer.parseInt(""+num.charAt(i));
+				booleanos b = mapanumeros.get(cifra);
+				if (b.getNorte()) {
+					System.out.print(" ");
+					System.out.print(guion);
+					System.out.print(" ");
+				}
+				else {
+					System.out.print(espacio);
+				}
+			}
+			System.out.println(" ");
+			/* Representación del noroeste y el noreste */
+			for (int j = 0; j<tamanio; j++) {
+				for (int i = 0; i<num.length(); i++) {
+					int cifra = Integer.parseInt(""+num.charAt(i));
+					booleanos b = mapanumeros.get(cifra);
+
+					if (b.getNoroeste()) System.out.print("|");
+					else System.out.print(" ");
+					System.out.print(medio);
+					if (b.getNoreste()) System.out.print("|");
+					else System.out.print(" ");
+				}
+				System.out.println(" ");
+			}
+			/* Representación del centro */
+			for (int i = 0; i<num.length(); i++) {
+				int cifra = Integer.parseInt(""+num.charAt(i));
+				booleanos b = mapanumeros.get(cifra);
+				if (b.getCentro()) {
+					System.out.print(" ");
+					System.out.print(guion);
+					System.out.print(" ");
+				}
+				else {
+					System.out.print(espacio);
+				}
+			}
+			System.out.println(" ");
+			/* Representación del suroeste y sureste */
+			for (int j = 0; j<tamanio; j++) {
+				for (int i = 0; i<num.length(); i++) {
+					int cifra = Integer.parseInt(""+num.charAt(i));
+					booleanos b = mapanumeros.get(cifra);
+
+					if (b.getSuroeste()) System.out.print("|");
+					else System.out.print(" ");
+					System.out.print(medio);
+					if (b.getSureste()) System.out.print("|");
+					else System.out.print(" ");
+				}
+				System.out.println(" ");
+			}
+			/* Representación del sur */
+			for (int i = 0; i<num.length(); i++) {
+				int cifra = Integer.parseInt(""+num.charAt(i));
+				booleanos b = mapanumeros.get(cifra);
 				if (b.getSur()) {
 					System.out.print(" ");
 					System.out.print(guion);
