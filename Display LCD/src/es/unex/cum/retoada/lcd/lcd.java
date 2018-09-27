@@ -27,7 +27,7 @@ public class lcd {
 		while (it.hasNext()) {
 			l.clear(); //Se borran todos los elementos de la lista para dibujar la nueva fila
 			String numeros = (String) it.next();
-			int tamanio = Integer.parseInt("" + numeros.charAt(0)); //tamaño de los números
+			int tamanio = Integer.parseInt("" + numeros.charAt(0)); //Tamaño de los números
 			for (int i = 2; i<numeros.length(); i++) {
 				int n = Integer.parseInt("" + numeros.charAt(i));
 				booleanos b = new booleanos();
